@@ -1,0 +1,58 @@
+﻿@model TaskManager.Models.Employee
+@{
+    ViewData["Title"] = "Employee Details";
+}
+
+<div class="container mt-5">
+
+    <div class="row d-flex justify-content-center">
+
+        <div class="col-md-7">
+
+            <div class="card p-3 py-4">
+
+                <div class="text-center">
+                    @if (!string.IsNullOrEmpty(Model.ProfileImagePath))
+                    {
+                        <img src="@Url.Content(Model.ProfileImagePath)" width="100" class="rounded-circle" alt="@Model.Name" />
+                    }
+                    else
+                    {
+                        <img src="~/images/default-profile.png" width="100" class="rounded-circle" alt="Default Profile" />
+                    }
+                </div>
+
+                <div class="text-center mt-3">
+                    <span class="bg-secondary p-1 px-3 rounded text-white">Employee</span>
+                    <div>
+                        <h5 class="mt-2 mb-0"><strong>Full Name: </strong>@Model.Name</h5>
+                    </div>
+                    <div>
+                        <strong>Email:</strong> @Model.Email
+                    </div>
+                    <div>
+                        <strong>Phone:</strong> @Model.Phone
+                    </div>
+
+                    
+
+                    
+
+
+                </div>
+                <div class="buttons text-center mt-3">
+
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary px-4 ms-3">Edit Profile</a>
+                    <a asp-action="Index" class="btn btn-outline-primary px-4 ms-3">Back to List</a>
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

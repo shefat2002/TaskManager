@@ -32,6 +32,27 @@ namespace TaskManager.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (user.ProfileImage != null)
+                {
+                    string fileName = Path.GetFileName(user.ProfileImage.FileName);
+                    string extension = Path.GetExtension(fileName);
+                    string isExist = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Pictures");
+                    if (!Directory.Exists(isExist))
+                    {
+                        Directory.CreateDirectory(isExist);
+                    }
+                    string filePath = Path.Combine(isExist, user.Id + extension);
+                    if (extension != ".jpg" && extension != ".png" && extension != ".jpeg")
+                    {
+                        ModelState.AddModelError("Picture", "Only .jpg, .png, and .jpeg files are allowed.");
+                        return View(user);
+                    }
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        user.ProfileImage.CopyTo(stream);
+                    }
+                    user.ProfileImagePath = "/Pictures/" + user.Id + extension;
+                }
                 await _dbContext.Employees.AddAsync(user);
                 var result = await _dbContext.SaveChangesAsync();
                 if (result > 0)
@@ -61,6 +82,98 @@ namespace TaskManager.Controllers
             else
             {
                 ModelState.AddModelError(string.Empty, "Please correct the errors and try again.");
+            }
+            return View(user);
+        }
+        [HttpGet]
+        public IActionResult edit(int id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var user = _dbContext.Employees.Find(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
+        //edit
+        [HttpPost]
+        public async Task<IActionResult> Edit(Employee user)
+        {
+            
+            if(ModelState.IsValid)
+            {
+                var existingUser = await _dbContext.Employees.FindAsync(user.Id);
+                if (existingUser != null)
+                {
+                    existingUser.Name = user.Name;
+                    existingUser.Email = user.Email;
+                    existingUser.Phone = user.Phone;
+
+                    if (user.ProfileImage != null)
+                    {
+                        string fileName = Path.GetFileName(user.ProfileImage.FileName);
+                        string extension = Path.GetExtension(fileName);
+                        string isExist = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Pictures");
+                        if (!Directory.Exists(isExist))
+                        {
+                            Directory.CreateDirectory(isExist);
+                        }
+                        string filePath = Path.Combine(isExist, user.Id + extension);
+                        if (extension != ".jpg" && extension != ".png" && extension != ".jpeg")
+                        {
+                            ModelState.AddModelError("Picture", "Only .jpg, .png, and .jpeg files are allowed.");
+                            return View(user);
+                        }
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            user.ProfileImage.CopyTo(stream);
+                        }
+                        existingUser.ProfileImagePath = "/Pictures/" + user.Id + extension;
+                    }
+                    _dbContext.Employees.Update(existingUser);
+                    var result = await _dbContext.SaveChangesAsync();
+                    if(result > 0)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    ModelState.AddModelError(string.Empty, "Failed to update employee."); 
+                    return View(user);
+                }
+            }
+            return View(user);
+        }
+
+        //delete
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var user = await _dbContext.Employees.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            _dbContext.Employees.Remove(user);
+            await _dbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+        //details
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var user = await _dbContext.Employees.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
             }
             return View(user);
         }
