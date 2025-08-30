@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using TaskManager.Models.Enums;
+using Tasklyne.Models.Enums;
 
-namespace TaskManager.Models;
+namespace Tasklyne.Models;
 
 public class AssignTask
 {

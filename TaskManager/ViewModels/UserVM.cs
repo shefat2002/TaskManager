@@ -1,4 +1,4 @@
-﻿namespace TaskManager.ViewModels;
+﻿namespace Tasklyne.ViewModels;
 
 public class UserVM
 {

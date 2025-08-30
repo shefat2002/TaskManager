@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace TaskManager.Controllers;
+namespace Tasklyne.Controllers;
 
 public class ManageRoleController : Controller
 {

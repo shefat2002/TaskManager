@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TaskManager.Data;
-using TaskManager.Models;
+using Tasklyne.Data;
+using Tasklyne.Models;
 
-namespace TaskManager.Controllers;
+namespace Tasklyne.Controllers;
 
 public class ProjectController : Controller
 {

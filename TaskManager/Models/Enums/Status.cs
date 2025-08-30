@@ -1,4 +1,4 @@
-﻿namespace TaskManager.Models.Enums
+﻿namespace Tasklyne.Models.Enums
 {
     public enum Status
     {

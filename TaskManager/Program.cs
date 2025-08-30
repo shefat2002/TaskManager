@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using TaskManager.Data;
+using Tasklyne.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

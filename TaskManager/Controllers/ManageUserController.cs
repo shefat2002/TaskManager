@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using TaskManager.ViewModels;
+using Tasklyne.ViewModels;
 
-namespace TaskManager.Controllers;
+namespace Tasklyne.Controllers;
 
 public class ManageUserController : Controller
 {
@@ -10,8 +10,8 @@ public class ManageUserController : Controller
     private RoleManager<IdentityRole> _roleManager;
     public ManageUserController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
     {
-        this._userManager = userManager;
-        this._roleManager = roleManager;
+        _userManager = userManager;
+        _roleManager = roleManager;
     }
     public async Task<IActionResult> Index()
     {

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using TaskManager.Data;
+using Tasklyne.Data;
 
-namespace TaskManager.Controllers;
+namespace Tasklyne.Controllers;
 
 public class DashboardController : Controller
 {

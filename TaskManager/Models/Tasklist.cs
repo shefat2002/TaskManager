@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TaskManager.Models;
+namespace Tasklyne.Models;
 
 public class Tasklist
 {

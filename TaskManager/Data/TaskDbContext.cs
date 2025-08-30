@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using TaskManager.Models;
+using Tasklyne.Models;
 
-namespace TaskManager.Data;
+namespace Tasklyne.Data;
 
 public class TaskDbContext : IdentityDbContext
 {

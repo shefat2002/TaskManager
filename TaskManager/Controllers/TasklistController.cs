@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TaskManager.Data;
-using TaskManager.Models;
+using Tasklyne.Data;
+using Tasklyne.Models;
 
-namespace TaskManager.Controllers;
+namespace Tasklyne.Controllers;
 
 public class TasklistController : Controller
 {
