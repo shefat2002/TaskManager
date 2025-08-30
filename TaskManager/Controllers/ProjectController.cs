@@ -1,12 +1,38 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TaskManager.Data;
+using TaskManager.Models;
 
-namespace TaskManager.Controllers
+namespace TaskManager.Controllers;
+
+public class ProjectController : Controller
 {
-    public class ProjectController : Controller
+    private readonly TaskDbContext _context;
+    public ProjectController(TaskDbContext context)
     {
-        public IActionResult Index()
+        _context = context;
+    }
+    public IActionResult Index()
+    {
+        var projects = _context.Projects.ToList();
+        return View(projects);
+    }
+    public IActionResult Create()
+    {
+        return View();
+    }
+    [HttpPost]
+    public IActionResult Create(Project project)
+    {
+        _context.Projects.Add(project);
+        var result = _context.SaveChanges();
+        if(result > 0)
         {
-            return View();
+            TempData["SuccessMsg"] = "Project created successfully!";
         }
+        else
+        {
+            TempData["ErrorMsg"] = "Failed to create project.";
+        }
+        return RedirectToAction("Index");
     }
 }

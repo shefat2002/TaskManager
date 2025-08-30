@@ -20,6 +20,7 @@ public class AssignTask
     public Status Status { get; set; } = Status.Pending;
     [StringLength(255, ErrorMessage = "Remarks must be less than or equal to 255 characters.")]
     public string? Remarks { get; set; }
+    public Tasklist Tasklist { get; set; }
 
     [NotMapped]
     public List<Tasklist> Tasklists { get; set; } = new List<Tasklist>();

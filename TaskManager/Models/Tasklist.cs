@@ -1,10 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TaskManager.Models;
 
 public class Tasklist
 {
+    public Tasklist()
+    {
+        ProjectList = new List<Project>();
+    }
     public int Id { get; set; }
     [Required(ErrorMessage = "You must enter the Task Title!")]
     [StringLength(25, ErrorMessage = "Title must be less than or equal to 25 characters.")]
@@ -14,9 +19,13 @@ public class Tasklist
     public bool IsCompleted { get; set; } = false;
     [ForeignKey("Project")]
     public int ProjectId { get; set; }
+    public Project Project { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now;
-    public Project Project { get; set; } = null!;
+    [NotMapped]
+    [ValidateNever]
+    public List<Project> ProjectList { get; set; }
     [NotMapped]
     public ICollection<AssignTask> AssignTasks { get; set; } = new List<AssignTask>();
+    
 
 }

@@ -1,0 +1,35 @@
+﻿@model IEnumerable<TaskManager.Models.AssignTask>
+
+@{
+    ViewData["Title"] = "Assign Task";
+}
+<h1>Assign Task</h1>
+<p>
+    <a asp-action="Create" class="btn btn-primary">Assign New Task</a>
+
+</p>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Employee</th>
+            <th>Task</th>
+            <th>Assigned Date</th>
+            <th>Due Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var assignTask in Model)
+        {
+            <tr>
+                <td>@assignTask.Employees.FirstOrDefault()?.Name</td>
+                <td>@assignTask.Tasklists.FirstOrDefault()?.Title</td>
+                <td>@assignTask.AssignDate.ToString("dd/MM/yyyy")</td>
+                <td>@assignTask.DueDate</td>
+                <td>@assignTask.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>
