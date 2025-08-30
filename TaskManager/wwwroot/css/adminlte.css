@@ -720,7 +720,7 @@ progress {
 }
 
     .blockquote-footer::before {
-        content: "— ";
+        content: "ï¿½ï¿½";
     }
 
 .img-fluid {
@@ -15086,7 +15086,7 @@ textarea.form-control-lg {
     }
 
 .brand-link.logo-switch::before {
-    content: " ";
+    content: "ï¿½";
 }
 
 .sidebar-mini.sidebar-collapse .app-sidebar {
